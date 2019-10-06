@@ -2,16 +2,14 @@ package com.manjesh.couchbase.service;
 
 import com.couchbase.client.java.Cluster;
 import com.manjesh.couchbase.CouchbaseTemplate;
-import com.manjesh.couchbase.config.ClientConfig;
+import com.manjesh.couchbase.config.CouchbaseClientConfig;
 import com.manjesh.couchbase.document.Document;
-import com.manjesh.couchbase.factory.ClusterFactory;
+import com.manjesh.couchbase.factory.CouchbaseClusterFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class CouchbaseTemplateImplTest {
     private String bucketName = "events";
@@ -20,11 +18,11 @@ public class CouchbaseTemplateImplTest {
 
     @Before
     public void setUp() throws Exception {
-        ClientConfig clientConfig = new ClientConfig();
-        clientConfig.setNodes(Arrays.asList("localhost"));
+        CouchbaseClientConfig clientConfig = new CouchbaseClientConfig();
+        clientConfig.setNodes(Arrays.asList("localhost")); //"10.0.0.1", "10.0.0.2"
         clientConfig.setMutationTokensEnabled(true);
         clientConfig.setComputationPoolSize(5);
-        Cluster cluster = new ClusterFactory().cluster(clientConfig);
+        Cluster cluster = new CouchbaseClusterFactory().cluster(clientConfig);
         couchbaseTemplate = new CouchbaseTemplateImpl(cluster, bucketName, bucketPassword);
     }
 

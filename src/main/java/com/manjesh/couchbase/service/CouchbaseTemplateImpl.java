@@ -11,7 +11,7 @@ import com.couchbase.client.java.query.N1qlQueryRow;
 import com.couchbase.client.java.transcoder.JsonTranscoder;
 import com.manjesh.couchbase.CouchbaseTemplate;
 import com.manjesh.couchbase.document.Document;
-import com.manjesh.couchbase.exception.ClientException;
+import com.manjesh.couchbase.exception.CouchbaseException;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -31,7 +31,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
     }
 
     @Override
-    public void save(Document document) throws ClientException {
+    public void save(Document document) throws CouchbaseException {
         Bucket bucket = null;
         try {
             bucket = cluster.openBucket(bucketName, bucketPassword);
@@ -42,7 +42,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
         } catch (Exception exception) {
             StringWriter errors = new StringWriter();
             exception.printStackTrace(new PrintWriter(errors));
-            throw new ClientException("Failed to save document due to " + errors.toString());
+            throw new CouchbaseException("Failed to save document due to " + errors.toString());
         } finally {
             if (bucket != null)
                 bucket.close();
@@ -50,7 +50,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
     }
 
     @Override
-    public void saveOrUpdate(Document document) throws ClientException {
+    public void saveOrUpdate(Document document) throws CouchbaseException {
         Bucket bucket = null;
         try {
             bucket = cluster.openBucket(bucketName, bucketPassword);
@@ -61,7 +61,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
         } catch (Exception exception) {
             StringWriter errors = new StringWriter();
             exception.printStackTrace(new PrintWriter(errors));
-            throw new ClientException("Failed to save/update document due to " + errors.toString());
+            throw new CouchbaseException("Failed to save/update document due to " + errors.toString());
         } finally {
             if (bucket != null)
                 bucket.close();
@@ -69,7 +69,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
     }
 
     @Override
-    public void replace(Document document) throws ClientException {
+    public void replace(Document document) throws CouchbaseException {
         Bucket bucket = null;
         try {
             bucket = cluster.openBucket(bucketName, bucketPassword);
@@ -80,7 +80,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
         } catch (Exception exception) {
             StringWriter errors = new StringWriter();
             exception.printStackTrace(new PrintWriter(errors));
-            throw new ClientException("Failed to replace document due to " + errors.toString());
+            throw new CouchbaseException("Failed to replace document due to " + errors.toString());
         } finally {
             if (bucket != null)
                 bucket.close();
@@ -88,7 +88,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
     }
 
     @Override
-    public void delete(Document document) throws ClientException {
+    public void delete(Document document) throws CouchbaseException {
         Bucket bucket = null;
         try {
             bucket = cluster.openBucket(bucketName, bucketPassword);
@@ -96,7 +96,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
         } catch (Exception exception) {
             StringWriter errors = new StringWriter();
             exception.printStackTrace(new PrintWriter(errors));
-            throw new ClientException("Failed to delete document for doc id: " + document.id() + " due to " + errors.toString());
+            throw new CouchbaseException("Failed to delete document for doc id: " + document.id() + " due to " + errors.toString());
         } finally {
             if (bucket != null)
                 bucket.close();
@@ -104,7 +104,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
     }
 
     @Override
-    public String retrieve(Document document) throws ClientException {
+    public String retrieve(Document document) throws CouchbaseException {
         Bucket bucket = null;
         try {
             bucket = cluster.openBucket(bucketName, bucketPassword);
@@ -115,7 +115,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
         } catch (Exception exception) {
             StringWriter errors = new StringWriter();
             exception.printStackTrace(new PrintWriter(errors));
-            throw new ClientException("Failed to retrieve document for doc id: " + document.id() + " due to " + errors.toString());
+            throw new CouchbaseException("Failed to retrieve document for doc id: " + document.id() + " due to " + errors.toString());
         } finally {
             if (bucket != null)
                 bucket.close();
@@ -124,7 +124,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
     }
 
     @Override
-    public List<String> search(String query) throws ClientException {
+    public List<String> search(String query) throws CouchbaseException {
         Bucket bucket = null;
         try {
             bucket = cluster.openBucket(bucketName, bucketPassword);
@@ -147,7 +147,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
         } catch (Exception exception) {
             StringWriter errors = new StringWriter();
             exception.printStackTrace(new PrintWriter(errors));
-            throw new ClientException("Failed to search documents due to " + errors.toString());
+            throw new CouchbaseException("Failed to search documents due to " + errors.toString());
         } finally {
             if (bucket != null)
                 bucket.close();
@@ -157,7 +157,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
     }
 
     @Override
-    public List<String> parameterizedSearch(String query, Object... parameters) throws ClientException {
+    public List<String> parameterizedSearch(String query, Object... parameters) throws CouchbaseException {
         Bucket bucket = null;
         try {
             bucket = cluster.openBucket(bucketName, bucketPassword);
@@ -180,7 +180,7 @@ public class CouchbaseTemplateImpl implements CouchbaseTemplate {
         } catch (Exception exception) {
             StringWriter errors = new StringWriter();
             exception.printStackTrace(new PrintWriter(errors));
-            throw new ClientException("Failed to search documents due to " + errors.toString());
+            throw new CouchbaseException("Failed to search documents due to " + errors.toString());
         } finally {
             if (bucket != null)
                 bucket.close();

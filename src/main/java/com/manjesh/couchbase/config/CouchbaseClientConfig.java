@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ClientConfig {
+public class CouchbaseClientConfig {
     private List<String> nodes;
     private String userName;
     private String password;

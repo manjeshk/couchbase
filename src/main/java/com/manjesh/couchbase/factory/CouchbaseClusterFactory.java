@@ -6,17 +6,17 @@ import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.CouchbaseCluster;
 import com.couchbase.client.java.env.CouchbaseEnvironment;
 import com.couchbase.client.java.env.DefaultCouchbaseEnvironment;
-import com.manjesh.couchbase.exception.ClientException;
-import com.manjesh.couchbase.config.ClientConfig;
+import com.manjesh.couchbase.exception.CouchbaseException;
+import com.manjesh.couchbase.config.CouchbaseClientConfig;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-public class ClusterFactory {
+public class CouchbaseClusterFactory {
     private Cluster cluster;
 
-    public Cluster cluster(ClientConfig clientConfig) throws ClientException {
+    public Cluster cluster(CouchbaseClientConfig clientConfig) throws CouchbaseException {
 
         try {
             DefaultCouchbaseEnvironment.Builder builder = DefaultCouchbaseEnvironment.builder();
@@ -148,20 +148,20 @@ public class ClusterFactory {
             if (StringUtils.isNotBlank(clientConfig.getUserName()) && StringUtils.isNotBlank(clientConfig.getPassword()))
                 cluster.authenticate(clientConfig.getUserName(), clientConfig.getPassword());
         } catch (Exception exception) {
-            throw new ClientException("Exception occured while creating cluster", exception);
+            throw new CouchbaseException("Exception occured while creating cluster", exception);
         } catch (Throwable throwable) {
-            throw new ClientException(throwable);
+            throw new CouchbaseException(throwable);
         }
 
         return cluster;
     }
 
-    public void disconnectCluster() throws ClientException {
+    public void disconnectCluster() throws CouchbaseException {
         try {
             if (cluster != null)
                 cluster.disconnect();
         } catch (Exception exception) {
-            throw new ClientException("Exception occured while closing all buckets and cluster", exception);
+            throw new CouchbaseException("Exception occured while closing all buckets and cluster", exception);
         }
     }
 
