@@ -39,6 +39,7 @@ public class CouchbaseTemplateImplTest {
         couchbaseTemplate.save(document);
     }
 
+
     @Test
     public void saveDocTest() {
         String baseEvent = "{  \"publicGuid\": \"1ae73514ea7a937bd681786eb6b5c99a\",  \"pageId\": \"Mobile\",  \"placementId\": \"Timeline\",  \"convertEventCode\": \"9\",  \"prodTx\": \"GCCC\",  \"eventData\": \"cm11,cmSupp,cm13,publicGuid,custXrefId,countryCd,durDayCt,durSecondCt,convertEventCd,eventSubtyp,controlGroupCd,custTypeCd,pageId,placementId,offeringGrpId,offeringId,cmpgnId,offerId,offerContentId,prodGroupCd,treatmentGrpId,channelId,deviceOsNm,userAgentTx,prodTx,externalOfferCd,externalSourceCd,eapplySourceCd,treatmentRank,custLoggedInd,webOfferSourceCd,ptsID\"}";
